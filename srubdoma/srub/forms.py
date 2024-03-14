@@ -1,0 +1,10 @@
+from django import forms
+
+
+class ContactForm(forms.Form):
+    first_name = forms.CharField(widget=forms.TextInput(
+            attrs={'placeholder':
+                   '* Ваше имя', }))
+    phone_number = forms.RegexField(
+        regex='^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$',
+        widget=forms.TextInput(attrs={'placeholder': '* +7-999-999-99-99'}))

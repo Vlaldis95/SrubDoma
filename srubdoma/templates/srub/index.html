@@ -21,5 +21,25 @@
     {{ozt.title}}<!-- имя автора -->
     {{otz.description}}<!-- сам отзыв -->
     {% endfor %}
+  <!-- форма -->
+  {% if form.errors %}
+      {% for field in form %} <!-- вывод ошибок для каждого поля, если они есть-->
+        {% for error in field.errors %}
+            {{ error|escape }}
+        {% endfor %}
+      {% endfor %}
+      {% for error in form.non_field_errors %}
+          {{ error|escape }}
+      {% endfor %}
+  {% endif %}
+                    {%if flag %}
+                      <p class="text cooperation__confirm">Спасибо! Ваша заявка сохранена!</p>
+                    {%endif%}
+    <form method="post">  
+      {% csrf_token %}
+      {{form.as_p}} <!--Имя-->
+      <input type="submit" value="Отправить">
+    </form>
+    <!-- конец формы -->
   </body>
 </html> 

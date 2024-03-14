@@ -1,9 +1,8 @@
-from django.contrib import admin
-from .models import Foundation, Feedback, Projects
 import django.contrib.auth.admin
 import django.contrib.auth.models
-from django.contrib import auth
+from django.contrib import admin, auth
 
+from .models import Feedback, Foundation, Projects
 
 admin.site.register(Foundation)
 admin.site.register(Feedback)
