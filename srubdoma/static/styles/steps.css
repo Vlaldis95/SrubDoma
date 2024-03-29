@@ -1,0 +1,141 @@
+.steps {
+  max-width: var(--width-max);
+  margin: 0 auto;
+  padding: var(--block-offside);
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+  .steps__swiper {
+    margin-top: 50px;
+  }
+
+.steps__swiper-controls {
+  align-self: flex-end;
+}
+
+.steps__title {
+  margin: 0;
+  color: var(--dark-blue);
+}
+
+.steps__slide {
+  width: 597px;
+  height: auto;
+  display: flex;
+  border-radius: var(--base-radius);
+  overflow: hidden;
+}
+
+.steps__slide-inner {
+  padding: 42px;
+  position: relative;
+  flex-grow: 1;
+}
+
+.steps__slide-inner > * {
+  position: relative;
+  z-index: var(--el-index);
+}
+
+.steps__step-count {
+  display: block;
+  margin-bottom: 24px;
+  color: var(--dark-blue);
+}
+
+.steps__step-title {
+  margin: 0 0 32px;
+  max-width: 70%;
+  min-height: 84px;
+  color: var(--dark-blue);
+}
+
+.steps__step-text {
+  margin: 0;
+  max-width: 85%;
+  color: var(--dark-blue);
+}
+
+.steps__step-icon {
+  position: absolute;
+  width: 150px;
+  height: 120px;
+  object-fit: contain;
+  object-position: center;
+  top: 42px;
+  right: 31px;
+}
+
+@media screen and (max-width: 1100px) {
+
+.steps__slide-inner {
+  padding: 40px;
+}
+
+  .steps__step-count {
+    margin-bottom: 8px;
+  }
+
+  .steps__step-title {
+    margin-bottom: 20px;
+    max-width: 100%;
+    min-height: 66px;
+  }
+
+  .steps__step-text {
+    max-width: 100%;
+  }
+
+  .steps__slide {
+    width: calc(50% - 10px);
+  }
+
+  .steps__step-icon {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin-bottom: 40px;
+    object-position: left;
+  }
+}
+
+@media screen and (max-width: 710px) {
+
+  .steps {
+    flex-direction: column;
+  }
+
+  .steps__slide-inner {
+    padding: 20px;
+  }
+
+  .steps__step-title {
+    min-height: auto;
+  }
+
+  .steps__step-count {
+    margin-bottom: 4px;
+  }
+
+  .steps__swiper {
+    margin-top: 20px;
+  }
+
+  .steps__slide {
+    width: 100%;
+  }
+  .steps__swiper-controls {
+    order: 3;
+    align-self: center;
+    margin-top: 20px;
+  }
+
+  .steps__step-icon {
+    width: 100px;
+    height: 80px;
+    margin-bottom: 20px;
+  }
+}

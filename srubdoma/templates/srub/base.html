@@ -1,0 +1,25 @@
+<!-- templates/posts/index.html -->
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock title %}</title>
+    <meta name="description" content="{% block description %}{% endblock description %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'vendor/normalize.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/global.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/typography.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/header.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/burger.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/footer.css' %}" />
+    {% block css %}{% endblock css %}
+    {% block script %}{% endblock script %}
+  </head>
+  <body class="root">
+    {% include "srub/header.html" %}
+    {% block content%}{% endblock content %}
+    {% include "srub/footer.html" %}
+  </body>
+</html>

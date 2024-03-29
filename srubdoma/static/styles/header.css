@@ -1,0 +1,245 @@
+.header {
+  display: flex;
+  max-width: var(--width-max);
+  width: 100%;
+  margin: 0 auto;
+  background-color: var(--white);
+}
+
+.header__mobile-header {
+  display: none;
+}
+
+.header__outer {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  margin: 20px var(--offset-side);
+}
+
+.header__container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-grow: 1;
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  border-radius: var(--base-radius);
+  padding: 15px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.header__logo-link {
+  width: 166px;
+  height: 30px;
+  margin-right: 16px;
+  z-index: 1;
+}
+
+.header__logo-link img {
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+.header__nav {
+  display: flex;
+  flex-grow: 1;
+  position: relative;
+    z-index: var(--el-index);
+}
+
+.header__nav-list {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  gap: 24px;
+}
+
+.header__nav-link {
+  color: var(--dark-blue);
+}
+
+.header__call {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header__call-tel {
+  color: var(--dark-blue);
+  margin-bottom: 5px;
+}
+
+.header__socials {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 1;
+}
+
+.header__socials_is-mobile {
+  display: none;
+}
+
+.header__social-link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.header__social-link img {
+  width: 18px;
+  height: 18px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.header__social-text {
+  color: var(--dark-blue);
+}
+
+@media screen and (max-width: 1100px) {
+  .header {
+    padding: var(--offset-side);
+    width: auto;
+  }
+
+  .header__logo-link {
+    width: 140px;
+    height: 34px;
+    align-self: flex-start;
+  }
+
+  .header__outer {
+    position: fixed;
+    display: flex;
+    align-items: flex-end;
+    inset: 0;
+    flex-direction: column;
+    background-color: var(--blue-60);
+    z-index: 2;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--base-transition),
+      visibility var(--base-transition);
+    transition-delay: 0.1s;
+    margin: 0;
+  }
+
+  .header__outer._opened {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  .header__container {
+    flex-direction: column;
+    flex-grow: 1;
+    background-color: var(--white);
+    max-width: 400px;
+    width: 100%;
+    padding: 40px 62px;
+    transform: translateX(100%);
+    transition: transform var(--base-transition);
+    transition-delay: 0.1s;
+  }
+
+  .header__outer._opened .header__container {
+    transform: translateX(0%);
+  }
+
+  .header__inner {
+    flex-direction: column;
+    background-color: transparent;
+    background-image: none;
+    align-items: flex-start;
+    align-self: flex-start;
+    padding: 0;
+  }
+
+  .header__inner::before,
+  .header__inner::after {
+    content: none;
+  }
+
+  .header__nav {
+    margin-top: 50px;
+  }
+
+  .header__nav-list {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
+  .header__mobile-header {
+    display: flex;
+    align-items: center;
+    position: relative;
+    flex-grow: 1;
+    border-radius: var(--base-radius);
+    justify-content: space-between;
+    padding: 13px 32px;
+    background-color: var(--light-grey);
+  }
+
+  .header__socials {
+    gap: 40px;
+  }
+
+  .header__socials_is-desktop {
+    display: none;
+  }
+
+  .header__socials_is-mobile {
+    display: flex;
+  }
+
+  .header__social-link img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .header__call-tel {
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .header {
+    padding: 20px var(--offset-side);
+  }
+
+  .header__container {
+    max-width: 260px;
+  }
+
+  .header__mobile-header {
+    padding: 8px 16px;
+    border-radius: 10px;
+  }
+
+  .header__logo-link_is-mobile-menu {
+    width: 136px;
+    height: 32px;
+  }
+
+  .header__container {
+    padding: 28px 40px;
+  }
+
+  .header__nav {
+    margin-top: 30px;
+  }
+
+  .header__nav-list {
+    gap: 20px;
+  }
+}

@@ -1,0 +1,187 @@
+.root {
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  position: relative;
+}
+
+._disabled {
+  overflow: hidden;
+}
+
+:root {
+  --black-80: rgba(0, 0, 0, 0.8);
+  --dark-blue: rgb(16, 25, 39);
+  --dark-blue-50: rgba(16, 25, 39, 0.5);
+  --blue: rgb(42, 55, 75);
+  --blue-60: rgb(42, 55, 75, 0.6);
+  --grey: rgb(161, 177, 190);
+  --grey-80: rgba(161, 177, 190, 0.6);
+  --light-grey: rgb(223, 230, 236);
+  --white: #fff;
+  --error: #f43232;
+  --width-max: 1440px;
+  --base-transition: 0.3s ease-in-out;
+  --base-radius: 20px;
+  --offset-side: 112px;
+  --offset-top-120: 120px;
+  --offset-top-50: 50px;
+  --block-offside: var(--offset-top-120) var(--offset-side) 0;
+  --el-index: 1;
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button {
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  border: none;
+}
+
+a {
+  text-decoration: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.with-light-texture,
+.with-dark-texture {
+  position: relative;
+}
+
+.with-light-texture::after,
+.with-dark-texture::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 0;
+}
+
+.with-light-texture::after {
+  background-image: url("../images/bg-texture.jpg");
+  opacity: 0.6;
+}
+
+.with-dark-texture::after {
+  background-image: url("../images/bg-texture-dark.jpg");
+  opacity: 0.8;
+}
+
+.with-light-texture::before,
+.with-dark-texture::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.with-light-texture::before {
+  background-color: var(--light-grey);
+}
+
+.with-dark-texture::before {
+  background-color: var(--grey-80);
+}
+
+.btn-dark {
+  padding: 18px 63px;
+  background-color: var(--blue);
+  color: var(--white);
+  border-radius: var(--base-radius);
+  transition: background-color var(--base-transition);
+}
+
+.btn-dark:active {
+  background-color: var(--dark-blue);
+}
+
+.btn-dark_is-small {
+  padding: 10px 38px;
+  border-radius: 10px;
+}
+
+.link,
+.link-light {
+  text-decoration: none;
+  transition: all 0.4s ease-in-out;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+
+.link::before,
+.link-light::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  width: 100%;
+  height: 1.5px;
+  transition: all var(--base-transition);
+}
+
+.link::before {
+  background-color: var(--dark-blue);
+}
+
+.link-light::before {
+  background-color: var(--grey);
+}
+
+@media screen and (min-width: 1000px) {
+  .btn-dark:hover {
+    background-color: var(--dark-blue);
+  }
+
+  .link:hover::before,
+  .link-light:hover::before {
+    transform: translateX(0%);
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  :root {
+    --offset-side: 20px;
+    --offset-top-120: 100px;
+    --offset-top-50: 60px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  :root {
+    --offset-top-120: 80px;
+    --offset-side: 10px;
+    --offset-top-50: 30px;
+  }
+
+  .btn-dark {
+    padding: 12px 42px;
+  }
+}

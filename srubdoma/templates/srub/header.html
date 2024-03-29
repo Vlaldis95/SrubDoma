@@ -1,0 +1,110 @@
+{% load static %}
+<header class="header" id="header">
+  <div class="header__mobile-header">
+    <a class="header__logo-link" aria-label="Вернуться в начало" href="/">
+      <img src="{%static './images/logo-new.svg'%}" alt="Логотип Фундамент-СПб.РФ" />
+    </a>
+    <button aria-label="Открыть меню" class="menu-burger">
+      <span class="menu-burger__item"></span>
+      <span class="menu-burger__item"></span>
+      <span class="menu-burger__item"></span>
+      <span class="menu-burger__item"></span>
+    </button>
+  </div>
+  <div class="header__outer">
+    <div class="header__container">
+      <div class="header__inner with-light-texture">
+        <a class="header__logo-link header__logo-link_is-mobile-menu" aria-label="Вернуться в начало" href="/">
+          <img src="{%static './images/logo-new.svg'%}" alt="Логотип Фундамент-СПб.РФ" />
+        </a>
+        <nav class="header__nav">
+          <ul class="header__nav-list">
+            <li class="text3 header__nav-item">
+              <a href="/#kinds" data-anchor="kinds" class="link header__nav-link">выды работ</a>
+            </li>
+            <li class="text3 header__nav-item">
+              <a href="/#steps" data-anchor="steps" class="link header__nav-link">этапы работ</a>
+            </li>
+            <li class="text3 header__nav-item">
+              <a href="/#projects" data-anchor="projects" class="link header__nav-link">проекты</a>
+            </li>
+            <li class="text3 header__nav-item">
+              <a href="/#quotes" data-anchor="quotes" class="link header__nav-link">отзывы</a>
+            </li>
+          </ul>
+        </nav>
+        <ul class="header__socials header__socials_is-desktop">
+          <li class="text4 header__social-item">
+            <a class="header__social-link" target="_blank" href="https://vk.com/srubdomarf">
+              <img
+              src="{%static './images/socials/vk.svg'%}"
+              alt="Логотип Вконтакте"
+              class="header__social-logo"
+              aria-hidden="true"
+            />
+              <span class="link header__social-text">Вконтакте</span>
+            </a>
+          </li>
+          <li class="text4 header__social-item">
+            <a class="header__social-link" target="_blank" href="https://wa.me/c/79219063991">
+              <img
+              src="{%static './images/socials/wa.svg'%}"
+              alt="Логотип WhatsApp"
+              class="header__social-logo"
+              aria-hidden="true"
+              />
+              <span class="link header__social-text">WhatsApp</span>
+            </a>
+          </li>
+          <li class="text4 header__social-item">
+            <a class="header__social-link" target="_blank" href="https://t.me/srubdomarf">
+              <img
+              src="{%static './images/socials/tg.svg'%}"
+              alt="Логотип Telegram"
+              class="header__social-logo"
+              aria-hidden="true"
+              />
+              <span class="link header__social-text">Telegram</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="header__call">
+        <a href="tel:+79219063991" class="link font-button header__call-tel">+7 921 906-39-91</a>
+        <button data-open-popup='' class="text4 btn-dark btn-dark_is-small header__call-btn">Заказать звонок</button>
+      </div>
+      <ul class="header__socials header__socials_is-mobile">
+        <li class="header__social-item">
+          <a class="header__social-link" target="_blank" href="https://vk.com/srubdomarf">
+            <img
+            src="{%static './images/socials/vk.svg'%}"
+            alt="Логотип Вконтакте"
+            class="header__social-logo"
+            aria-hidden="true"
+          />
+          </a>
+        </li>
+        <li class="header__social-item">
+          <a class="header__social-link" target="_blank" href="https://wa.me/c/79219063991">
+            <img
+            src="{%static './images/socials/wa.svg'%}"
+            alt="Логотип WhatsApp"
+            class="header__social-logo"
+            aria-hidden="true"
+            />
+          </a>
+        </li>
+        <li class="header__social-item">
+          <a class="header__social-link" target="_blank" href="https://t.me/srubdomarf">
+            <img
+            src="{%static './images/socials/tg.svg'%}"
+            alt="Логотип Telegram"
+            class="header__social-logo"
+            aria-hidden="true"
+            />
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>

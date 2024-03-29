@@ -1,0 +1,93 @@
+.approach {
+  max-width: var(--width-max);
+  margin: 0 auto;
+  padding: var(--block-offside);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.approach__title {
+  margin: 0 0 16px;
+  color: var(--dark-blue)
+}
+
+.approach__text {
+  margin: 0;
+  color: var(--dark-blue)
+}
+
+.approach__order {
+  border-radius: var(--base-radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 36px 56px;
+  text-align: center;
+}
+
+.approach__order-btn,
+.approach__order-title {
+  position: relative;
+  z-index: 1;
+}
+
+.approach__order-title {
+  margin: 0 0 24px;
+  color: var(--dark-blue)
+}
+
+@media screen and (max-width: 1100px) {
+  .approach {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .approach__description {
+    margin-left: 70px;
+    justify-self: end;
+  }
+
+  .approach__title {
+    margin-bottom: 20px;
+  }
+
+  .approach__order {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    gap: 24px;
+    padding: 47px 24px 47px 70px;
+  }
+
+
+.approach__order-title {
+  margin: 0;
+}
+}
+
+@media screen and (max-width: 710px) {
+  .approach {
+    gap: 20px;
+  }
+
+  .approach__title {
+    margin-bottom: 10px;
+  }
+
+  .approach__description {
+    margin-left: 0;
+    justify-self: start;
+  }
+
+
+  .approach__order {
+    flex-direction: column;
+    text-align: center;
+    align-items: stretch;
+    padding: 20px 13px;
+    border-radius: 10px;
+    gap: 20px;
+  }
+}

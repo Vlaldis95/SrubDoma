@@ -1,0 +1,127 @@
+.about {
+  max-width: var(--width-max);
+  margin: 0 auto;
+  padding: var(--block-offside);
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 20px;
+}
+.about__title {
+  text-transform: uppercase;
+  margin: 0 0 30px;
+  color: var(--dark-blue)
+}
+
+.about__text {
+  margin: 0 0 10px;
+  color: var(--dark-blue)
+}
+
+.about__text:last-child {
+  margin: 0;
+}
+
+.about__advantages {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px 20px;
+  max-width: 50%;
+  width: 100%;
+}
+.about__advantage {
+  position: relative;
+  border-radius: var(--base-radius);
+  overflow: hidden;
+  padding: 40px 48px 54px;
+  min-height: 235px;
+  display: flex;
+  flex-direction: column;
+}
+.about__advantage-count,
+.about__advantage-description,
+.about__title,
+.about__text {
+  position: relative;
+  z-index: var(--el-index);
+}
+
+.about__advantage-count {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: var(--dark-blue);
+}
+
+.about__advantage-description {
+  color: var(--dark-blue);
+}
+
+.about__about {
+  position: relative;
+  max-width: 50%;
+  width: 100%;
+  border-radius: var(--base-radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 60px;
+}
+
+@media screen and (max-width: 1100px) {
+  .about {
+    flex-direction: column-reverse;
+    gap: 40px;
+  }
+
+  .about__advantages {
+    gap: 20px;
+    max-width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about__advantage {
+    padding: 40px 48px;
+    min-height: 188px;
+  }
+
+  .about__about {
+    max-width: 100%;
+    padding: 48px 70px;
+  }
+
+  .about__title {
+    margin: 0 0 16px;
+  }
+
+  .about__advantage-description {
+    max-width: 70%;
+  }
+}
+@media screen and (max-width: 710px) {
+  .about {
+    gap: 20px;
+  }
+
+  .about__advantages {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .about__advantage {
+    padding: 20px 48px;
+    min-height: auto;
+  }
+
+  .about__advantage-description {
+    max-width: 100%;
+  }
+
+  .about__advantage-count {
+    margin-bottom: 8px;
+  }
+
+  .about__about {
+    padding: 40px 20px;
+    border-radius: 10px;
+  }
+}

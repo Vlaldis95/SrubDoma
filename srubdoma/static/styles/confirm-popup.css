@@ -1,0 +1,19 @@
+.confirm-popup__container {
+  padding: 85px 58px;
+}
+
+.confirm-popup__input {
+  color: var(--dark-blue);
+}
+
+.confirm-popup__input::placeholder {
+  color: var(--dark-blue-50);
+}
+
+@media screen and (max-width: 1100px) {}
+
+@media screen and (max-width: 710px) {
+  .confirm-popup__container {
+    padding: 40px 20px;
+  }
+}

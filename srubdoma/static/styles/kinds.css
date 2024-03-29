@@ -1,0 +1,141 @@
+.kinds {
+  max-width: var(--width-max);
+  margin: 0 auto;
+  padding: var(--block-offside);
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.kinds__title {
+  margin: 0;
+  color: var(--dark-blue);
+}
+
+.kinds__slide {
+  border-radius: var(--base-radius);
+  overflow: hidden;
+}
+
+.kinds__slide-inner {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 21px;
+  padding: 42px;
+}
+
+.kinds__swiper {
+  margin-top: 47px;
+}
+
+.kinds__swiper-controls {
+  align-self: flex-end;
+}
+
+.kinds__description,
+.kinds__picture {
+  position: relative;
+  z-index: 3;
+}
+
+.kinds__description {
+  order: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.kinds__picture {
+  order: 1;
+  width: 554px;
+  height: 416px;
+  border-radius: var(--base-radius);
+  overflow: hidden;
+}
+
+.kinds__picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.kinds__slide-title {
+  margin: 0 0 24px;
+  text-align: left;
+  color: var(--dark-blue);
+}
+
+.kinds__text {
+  margin: 0 0 42px;
+  text-align: left;
+  color: var(--dark-blue);
+}
+
+@media screen and (max-width: 1100px) {
+  .kinds__swiper {
+    margin-top: 40px;
+  }
+
+  .kinds__slide-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 40px;
+  }
+
+  .kinds__picture {
+    width: 100%;
+    height: 300px;
+  }
+
+  .kinds__slide-title {
+    margin-bottom: 16px;
+  }
+
+  .kinds__text {
+    margin-bottom: 40px;
+  }
+}
+
+@media screen and (max-width: 710px) {
+  .kinds {
+    flex-direction: column;
+  }
+
+  .kinds__swiper {
+    margin-top: 20px;
+    order: 2;
+  }
+
+  .kinds__slide-inner {
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .kinds__title {
+    order: 1;
+  }
+
+  .kinds__picture {
+    height: 174px;
+  }
+
+  .kinds__slide-title {
+    margin-bottom: 10px;
+  }
+
+  .kinds__text {
+    margin-bottom: 20px;
+  }
+
+  .kinds__btn {
+    align-self: stretch;
+  }
+
+  .kinds__swiper-controls {
+    order: 3;
+    align-self: center;
+    margin-top: 20px;
+  }
+}

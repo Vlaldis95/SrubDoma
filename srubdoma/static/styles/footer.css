@@ -1,0 +1,138 @@
+.footer {
+  max-width: var(--width-max);
+  margin: 0 auto;
+  padding: 100px var(--offset-side) 93px;
+  display: grid;
+  grid-auto-rows: min-content;
+  grid-template-areas:
+  'logo nav socials tel'
+  'privacy nav socials btn';
+  justify-content: space-between;
+}
+
+.footer__logo {
+  grid-area: logo;
+  width: 244px;
+  height: 58px;
+}
+
+.footer__logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+.footer__privacy {
+  grid-area: privacy;
+  text-transform: lowercase;
+  color: var(--grey);
+  align-self: end;
+  justify-self: start;
+}
+.footer__nav {
+  grid-area: nav;
+}
+.footer__nav-item {
+  display: flex;
+}
+.footer__nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footer__nav-link {
+  color: var(--dark-blue);
+}
+
+.footer__socials {
+  grid-area: socials;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+.footer__socials-link {
+  color: var(--dark-blue);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.footer__socials-link img {
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.footer__tel {
+  grid-area: tel;
+  color: var(--dark-blue);
+  align-self: start;
+  justify-self: start;
+}
+.footer__btn {
+  grid-area: btn;
+}
+
+@media screen and (max-width: 1100px) {
+  .footer {
+    padding: 42px var(--offset-side) 58px;
+    grid-template-areas:
+    'logo tel'
+    'logo socials'
+    'privacy btn';
+    grid-template-columns: 1fr 1.5fr;
+    column-gap: 100px;
+  }
+
+  .footer__nav {
+    display: none;
+  }
+
+  .footer__tel {
+    margin-bottom: 20px;
+  }
+
+  .footer__socials {
+    flex-direction: row;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+}
+
+@media screen and (max-width: 710px) {
+  .footer {
+    padding-bottom: 54px;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    grid-template-areas:
+    'logo'
+    'tel'
+    'btn'
+    'socials'
+    'privacy';
+  }
+
+  .footer__logo {
+    width: 147px;
+    height: 35px;
+    margin-bottom: 30px;
+  }
+
+  .footer__btn {
+    margin-bottom: 40px;
+    justify-self: stretch;
+  }
+
+  .footer__socials {
+    margin-bottom: 40px;
+  }
+
+  .footer__tel,
+  .footer__privacy {
+    justify-self: center;
+  }
+}

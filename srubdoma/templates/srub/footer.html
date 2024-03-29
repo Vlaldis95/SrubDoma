@@ -1,0 +1,84 @@
+{% load static %}
+<footer class="footer" id="footer">
+  <a aria-label="Вернуться на главную страницу" class="footer__logo" href="/">
+    <img
+      src="{%static './images/logo-new.svg'%}"
+      alt="Логотип Фундамент-СПб.РФ"
+    />
+  </a>
+  <a
+    class="text4 link-light footer__privacy"
+    target="_blank"
+    href="{% static './docs/privacy.pdf' %}"
+    >политика конфиденциальности</a
+  >
+  <nav class="footer__nav">
+    <ul class="footer__nav-list">
+      <li class="text3 footer__nav-item">
+        <a class="link footer__nav-link" href="/#kinds">Виды работ</a>
+      </li>
+      <li class="text3 footer__nav-item">
+        <a class="link footer__nav-link" href="#steps">Этапы строительства</a>
+      </li>
+      <li class="text3 footer__nav-item">
+        <a class="link footer__nav-link" href="/#projects">Проекты</a>
+      </li>
+      <li class="text3 footer__nav-item">
+        <a class="link footer__nav-link" href="/#quotes">Отзывы</a>
+      </li>
+    </ul>
+  </nav>
+  <ul class="footer__socials">
+    <li class="text4 footer__socials-item">
+      <a
+        class="footer__socials-link"
+        target="_blank"
+        href="https://vk.com/srubdomarf"
+      >
+        <img
+          src="{%static './images/socials/vk.svg'%}"
+          alt="Логотип Вконтакте"
+          class="footer__socials-logo"
+          aria-hidden="true"
+        />
+        <span class="link footer__socials-text">Вконтакте</span>
+      </a>
+    </li>
+    <li class="text4 footer__socials-item">
+      <a
+        class="footer__socials-link"
+        target="_blank"
+        href="https://wa.me/c/79219063991"
+      >
+        <img
+          src="{%static './images/socials/wa.svg'%}"
+          alt="Логотип WhatsApp"
+          class="footer__socials-logo"
+          aria-hidden="true"
+        />
+        <span class="link footer__socials-text">WhatsApp</span>
+      </a>
+    </li>
+    <li class="text4 footer__socials-item">
+      <a
+        class="footer__socials-link"
+        target="_blank"
+        href="https://t.me/srubdomarf"
+      >
+        <img
+          src="{%static './images/socials/tg.svg'%}"
+          alt="Логотип Telegram"
+          class="footer__socials-logo"
+          aria-hidden="true"
+        />
+        <span class="link footer__socials-text">Telegram</span>
+      </a>
+    </li>
+  </ul>
+  <a href="tel:+79219063991" class="link title4 footer__tel"
+    >+7 921 906-39-91</a
+  >
+  <button data-open-popup="" class="font-button btn-dark footer__btn">
+    Заказать звонок
+  </button>
+</footer>

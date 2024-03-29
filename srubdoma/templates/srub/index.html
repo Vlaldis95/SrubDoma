@@ -1,45 +1,682 @@
-<!-- templates/posts/index.html -->
-<!DOCTYPE html> 
-<html lang="ru">
-  <head>
-  </head>
-  <body>
-    <h2>Выполненные проекты</h2>
-    {% for i in projects %} <!-- цикл выдает по одному проекту из всей выборки -->
-    {{i.title}} <!-- название проекта -->
-    {{i.description}}<!-- описание проекта -->
-    <img src="{{i.photo.url}}"> <!--фото проекта -->
-    {% endfor %}
-    <h2>Виды фундаментов</h2>
-    {% for fundament in foundation %}<!-- цикл выдает по одному виду фундамента из всей выборки -->
-    {{fundament.title}}<!-- название фундамента -->
-    {{fundament.description}}<!-- описание фундамента -->
-    <img src="{{fundament.photo.url}}"><!--фото фундамента -->
-    {% endfor %}
-    <h2>Отзывы</h2>
-    {% for otz in feedback %}<!-- цикл выдает по одному отзыву -->
-    {{ozt.title}}<!-- имя автора -->
-    {{otz.description}}<!-- сам отзыв -->
-    {% endfor %}
-  <!-- форма -->
-  {% if form.errors %}
-      {% for field in form %} <!-- вывод ошибок для каждого поля, если они есть-->
-        {% for error in field.errors %}
-            {{ error|escape }}
-        {% endfor %}
-      {% endfor %}
-      {% for error in form.non_field_errors %}
-          {{ error|escape }}
-      {% endfor %}
-  {% endif %}
-                    {%if flag %}
-                      <p class="text cooperation__confirm">Спасибо! Ваша заявка сохранена!</p>
-                    {%endif%}
-    <form method="post">  
+{% extends "srub/base.html" %}
+{% load static %}
+{% block title %}срубдома.рф{% endblock title %}
+{% block description %}Фундаменты под ключ без посредников с гарантией 5 лет в Санкт-Петербурге и ЛО{% endblock description %}
+{% block css %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<link rel="stylesheet" href="{% static 'styles/slider.css' %}" />
+<link rel="stylesheet" href="{% static 'styles/promo.css' %}" />
+<link rel="stylesheet" href="{% static 'styles/about.css' %}" />
+<link rel="stylesheet" href="{% static 'styles/advantages.css' %}" />
+<link rel="stylesheet" href="{% static 'styles/head-site.css' %}" />
+<link rel="stylesheet" href="{% static 'styles/kinds.css' %}" />
+<link rel="stylesheet" href="{% static 'styles/steps.css' %}" />
+<link rel="stylesheet" href="{% static 'styles/projects.css' %}" />
+<link rel="stylesheet" href="{% static 'styles/quotes.css' %}" />
+<link rel="stylesheet" href="{% static 'styles/approach.css' %}" />
+<link rel="stylesheet" href="{% static 'styles/offer.css' %}" />
+<link rel="stylesheet" href="{% static 'styles/map.css' %}" />
+<link rel="stylesheet" href="{% static 'styles/popup.css' %}" />
+<link rel="stylesheet" href="{% static 'styles/request-popup.css' %}" />
+<link rel="stylesheet" href="{% static 'styles/confirm-popup.css' %}" />
+{% endblock css %}
+{% block script %}
+<script type="module" src="{% static './scripts/index.js' %}"></script>
+<script src="https://unpkg.com/imask"></script>
+{% endblock script %}
+{% block content %}
+<section class="promo">
+  <h1 class="title1 promo__title">
+    <span>Строим Фундаменты</span><span>для вашего будущего</span>
+  </h1>
+  <div class="promo__description">
+    <div class="promo__description-inner">
+      <p class="title4 promo__text">
+        Фундаменты под ключ без посредников с гарантией 5&nbsp;лет в Санкт-Петербурге
+        и ЛО
+      </p>
+      <button data-open-popup='' class="font-button btn-dark promo__btn">Оставить заявку</button>
+    </div>
+  </div>
+  <div class="promo__banner">
+    <picture class="promo__pic">
+      <source media="(min-width: 600px)" srcset="{% static './images/promo-desk.jpg' %}" />
+      <img src="{% static './images/promo.jpg' %}" alt="Строительная площадка Фундаменты-Спб.РФ" />
+    </picture>
+  </div>
+</section>
+<section class="about">
+  <div class="about__about with-light-texture">
+    <h2  class="title3 about__title">о компании</h2>
+    <p  class="text1 about__text">Наша история начинается в 1994 году с увлечения, знакомства с новым делом и конечно с новыми людьми, профессиональными строителями из Финляндии, Канады, Германии и Сибири.</p>
+    <p  class="text1 about__text">Мы совершили удивительное путешествие в Германию и Канаду на обучение, где изучили оригинальные технологии бревенчатого, каркасного и каменного домостроения, которые почти 30 лет успешно применяем в наших домах, банях и фундаментах.</p>
+  </div>
+  <ul class="about__advantages">
+    <li class="about__advantage with-dark-texture">
+      <span class="title1 about__advantage-count">180</span>
+      <span class="title4 about__advantage-description">возведённых фундаментов</span>
+    </li>
+    <li class="about__advantage with-dark-texture">
+      <span class="title1 about__advantage-count">5</span>
+      <span class="title4 about__advantage-description">лет гарантии на работы</span>
+    </li>
+    <li class="about__advantage with-dark-texture">
+      <span class="title1 about__advantage-count">350</span>
+      <span class="title4 about__advantage-description">построенных объектов</span>
+    </li>
+    <li class="about__advantage with-dark-texture">
+      <span class="title1 about__advantage-count">28</span>
+      <span class="title4 about__advantage-description">лет на рынке</span>
+    </li>
+  </ul>
+</section>
+<section class="advantages">
+  <h2 class="title2-up advantages__title">Почему выбирают нас?</h2>
+  <ul class="advantages__list">
+    <li class="advantages__item">
+      <img aria-hidden="true" class="advantages__icon" src="{% static './images/icons/material.svg' %}" alt="Иконка материалов">
+      <h3 class="title4 advantages__subtitle">Материалы</h3>
+      <p class="text1 advantages__text">Напрямую от проверенных производителей, без наценок</p>
+    </li>
+    <li class="advantages__item">
+      <img aria-hidden="true" class="advantages__icon" src="{% static './images/icons/supervision.svg' %}" alt="Иконка материалов">
+      <h3 class="title4 advantages__subtitle">Тех.надзор</h3>
+      <p class="text1 advantages__text">Контроль и подробный фотоотчет скрытых работ от прораба с опытом работы более 15 лет</p>
+    </li>
+    <li class="advantages__item">
+      <img aria-hidden="true" class="advantages__icon" src="{% static './images/icons/reliability.svg' %}" alt="Иконка материалов">
+      <h3 class="title4 advantages__subtitle">Надёжность</h3>
+      <p class="text1 advantages__text">Комплексные необходимые решения — от дренажа и подсыпки, до выбора типа фундамента</p>
+    </li>
+    <li class="advantages__item">
+      <img aria-hidden="true" class="advantages__icon" src="{% static './images/icons/price.svg' %}" alt="Иконка материалов">
+      <h3 class="title4 advantages__subtitle">Цена</h3>
+      <p class="text1 advantages__text">Фиксированная цена, сроки и график финансирования по договору</p>
+    </li>
+  </ul>
+</section>
+<section class="approach">
+  <div class="approach__description">
+    <h3 class="title3-up approach__title">рациональный и комплексный подход</h3>
+    <p class="text1 approach__text">Наш рациональный и комплексный подход позволяет Заказчикам получить не просто фундамент, а готовый нулевой цикл с разводкой всех подземных коммуникаций, что избавляет от переделок и переплат в будущем.</p>
+  </div>
+  <div class="approach__order with-light-texture">
+    <h4 class="title4 approach__order-title">Закажи фундамент прямо сейчас и получи 5% скидку на все работы!</h4>
+    <button data-open-popup='' class="font-button btn-dark approach__order-btn">Заказать</button>
+  </div>
+</section>
+<section class="head-site">
+  <h2 class="title2-up head-site__title">
+    <span>строительство под ключ</span>
+    <span>как единая экосистема</span>
+  </h2>
+  <div class="head-site__inner">
+    <div class="head-site__banner">
+      <picture class="head-site__pic">
+        <source media="(min-width: 600px)" srcset="{% static './images/head-site-768.jpg' %}" />
+        <img src="{% static './images/head-site.jpg' %}" alt="Пример дома Срубдома.рф" />
+      </picture>
+    </div>
+    <div class="head-site__description">
+      <p class="text1   head-site__text">
+        Наши проекты — это целая экосистема строительства, позволяющая возводить на высококлассных фундаментах как каменные дома, так и дома из срубов.<br/>
+        Результаты нашей работы — это уникальные дизайнерские решения и индивидуальные проекты, позволяющие удовлетворить любого клиента. Мы уверены, что сможем помочь и вам создать свой идеальный дом.
+      </p>
+      <a
+        class="title4 head-site__btn"
+        aria-label="Перейти на сайт Срубдома.рф"
+        href="https://xn--80abj6ajjgr.xn--p1ai/"
+        target="_blank">
+        <span>срубдома.рф</span>
+      </a>
+    </div>
+  </div>
+</section>
+<section class="kinds" id="kinds">
+  <!-- Добавить после согласования -->
+  {% for fundament in foundation %}<!-- цикл выдает по одному виду фундамента из всей выборки -->
+  {{fundament.title}}<!-- название фундамента -->
+  {{fundament.description}}<!-- описание фундамента -->
+  <img src="{{fundament.photo.url}}" /><!--фото фундамента -->
+  {% endfor %}
+  <!-- --------------------------- -->
+
+  <h2 class="title2-up kinds__title">виды Фундаментов</h2>
+  <div class="slider-nav kinds__swiper-controls">
+    <button aria-label="Предыдущий слайд" class="slider-nav-arrow slider-nav-arrow__prev kinds__btn-prev"></button>
+    <button aria-label="Следующий слайд" class="slider-nav-arrow slider-nav-arrow__next kinds__btn-next"></button>
+  </div>
+  <div class="swiper kinds__swiper" id="kinds-slider">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide kinds__slide">
+        <div class="kinds__slide-inner with-light-texture">
+            <div class="kinds__description">
+            <h3 class="title3-up kinds__slide-title">Монолитная плита</h3>
+            <p class="kinds__text">
+              Универсальный и надёжный фундамент для каменного или деревянного дома и бани.
+              80% наших клиентов заказывают именно плиту. Идеальный вариант для относительно ровных участков. Монолитная плита — готовое ровное основание для любых полов, включая тёплые полы.
+            </p>
+            <button data-open-popup='' class="font-button btn-dark kinds__btn">Заказать</button>
+          </div>
+          <picture class="kinds__picture">
+            <img src="{% static './images/kinds/kinds-1.jpg' %}" alt="Первый вариант фаундамента Фундаменты-Спб.РФ" />
+          </picture>
+        </div>
+      </div>
+      <div class="swiper-slide kinds__slide">
+        <div class="kinds__slide-inner with-light-texture">
+          <div class="kinds__description">
+          <h3 class="title3-up kinds__slide-title">Плита с ростверком</h3>
+          <p class="kinds__text">
+            Монолитная плита с рёбрами жёсткости — разновидность классической плиты.
+            Позволяет ставить дом на плитном фундаменте даже на участках с рельефом и прятать
+            коммуникации во внутренней засыпке фундамента. Плита с верхним ростверком требует устройства
+            стяжки в будущем.
+          </p>
+          <button data-open-popup='' class="font-button btn-dark kinds__btn">Заказать</button>
+        </div>
+        <picture class="kinds__picture">
+          <img src="{% static './images/kinds/kinds-2.jpg' %}" alt="Второй вариант фаундамента Фундаменты-Спб.РФ" />
+        </picture>
+        </div>
+      </div>
+      <div class="swiper-slide kinds__slide">
+        <div class="kinds__slide-inner with-light-texture">
+          <div class="kinds__description">
+          <h3 class="title3-up kinds__slide-title">Утеплённая шведская плита (УШП)</h3>
+          <p class="kinds__text">
+            Фундамент со встроенным тёплым полом и полным утеплением подошвы и периметра фундамента
+            для относительно ровных участков. Комплексное, а следовательно более дорогое решение для лёгких,
+            каркасных или одноэтажных каменных зданий. Требует подробной инженерной проработки проекта.
+          </p>
+          <button data-open-popup='' class="font-button btn-dark kinds__btn">Заказать</button>
+        </div>
+        <picture class="kinds__picture">
+          <img src="{% static './images/kinds/kinds-3.jpg' %}" alt="Третий вариант фаундамента Фундаменты-Спб.РФ" />
+        </picture>
+        </div>
+      </div>
+      <div class="swiper-slide kinds__slide">
+        <div class="kinds__slide-inner with-light-texture">
+          <div class="kinds__description">
+          <h3 class="title3-up kinds__slide-title">Утеплённый финский фундамент (УФФ)</h3>
+          <p class="kinds__text">
+            Разновидность УШП — утеплённая конструкция со встроенным тёплым полом и верхним ростверком
+            из тёплых блоков для ровных участков и для участков с небольшим рельефом, позволяет поднять
+            дом выше от грунта.
+          </p>
+          <button data-open-popup='' class="font-button btn-dark kinds__btn">Заказать</button>
+        </div>
+        <picture class="kinds__picture">
+          <img src="{% static './images/kinds/kinds-4.jpg' %}" alt="Четверый вариант фаундамента Фундаменты-Спб.РФ" />
+        </picture>
+        </div>
+      </div>
+      <div class="swiper-slide kinds__slide">
+        <div class="kinds__slide-inner with-light-texture">
+          <div class="kinds__description">
+          <h3 class="title3-up kinds__slide-title">Ленточный фундамент</h3>
+          <p class="kinds__text">
+            Монолитный фундамент в виде ленты под несущими стенами здания.
+            Ленту выбирают как правило на участках с рельефом или руководствуясь соображениями
+            экономии, однако ленточный фундамент в последствии требует внутренней засыпки и устройства верхней стяжки.
+          </p>
+          <button data-open-popup='' class="font-button btn-dark kinds__btn">Заказать</button>
+        </div>
+        <picture class="kinds__picture">
+          <img src="{% static './images/kinds/kinds-5.jpg' %}" alt="Пятый вариант фаундамента Фундаменты-Спб.РФ" />
+        </picture>
+        </div>
+      </div>
+      <div class="swiper-slide kinds__slide">
+        <div class="kinds__slide-inner with-light-texture">
+          <div class="kinds__description">
+          <h3 class="title3-up kinds__slide-title">Свайный фундамент</h3>
+          <p class="kinds__text">
+            Наиболее лёгкий, экономичный и быстровозводимый тип фундамента.
+            Требует тщательного утепления пола первого этажа и коммуникаций под 
+            фундаментом. Винтовые или бурозабивные сваи предназначены для временных
+            или лёгких построек. В домах постоянного проживания обязательно создание
+            мощной платформы для отсутствия эффекта «барабана», что практически
+            сводит на нет все экономические преимущества.
+          </p>
+          <button data-open-popup='' class="font-button btn-dark kinds__btn">Заказать</button>
+        </div>
+        <picture class="kinds__picture">
+          <img src="{% static './images/kinds/kinds-6.jpg' %}" alt="Шестой вариант фаундамента Фундаменты-Спб.РФ" />
+        </picture>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="steps" id="steps">
+  <h2 class="title2-up steps__title">Этапы строительства</h2>
+  <div class="slider-nav steps__swiper-controls">
+    <button aria-label="Предыдущий слайд" class="slider-nav-arrow slider-nav-arrow__prev steps__btn-prev"></button>
+    <button aria-label="Следующий слайд" class="slider-nav-arrow slider-nav-arrow__next steps__btn-next"></button>
+  </div>
+  <div class="swiper steps__swiper" id="steps-slider">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide steps__slide">
+        <div class="steps__slide-inner with-light-texture">
+          <img class="steps__step-icon" aria-hidden="true" src="{% static './images/steps/step-1.svg' %}" alt="Первый этап">
+          <span class="title3-up steps__step-count">1 шаг</span>
+          <h3 class="title4 steps__step-title">Знакомство с проектом, осмотр участка и подъездов к нему</h3>
+          <p class="text1 steps__step-text">
+            Часто этот этап отрабатываем удалённо, по фотографиям и видео, но бывают сложные моменты,
+            влияющие на конечную цену, поэтому рекомендуем все ‑ таки встречаться непосредственно на участке
+          </p>
+        </div>
+      </div>
+      <div class="swiper-slide steps__slide">
+        <div class="steps__slide-inner with-light-texture">
+          <img class="steps__step-icon" aria-hidden="true" src="{% static './images/steps/step-2.svg' %}" alt="Второй этап">
+          <span class="title3-up steps__step-count">2 шаг</span>
+          <h3 class="title4 steps__step-title">Правильная геология</h3>
+          <p class="text1 steps__step-text">
+            Определение состава грунта на месте строительства, уровня грунтовых вод, наличия
+            или отсутствия других особенностей участка
+          </p>
+        </div>
+      </div>
+      <div class="swiper-slide steps__slide">
+        <div class="steps__slide-inner with-light-texture">
+          <img class="steps__step-icon" aria-hidden="true" src="{% static './images/steps/step-3.svg' %}" alt="Третий этап">
+          <span class="title3-up steps__step-count">3 шаг</span>
+          <h3 class="title4 steps__step-title">Чертежи и схемы коммуникаций</h3>
+          <p class="text1 steps__step-text">
+            В соответствии с геологией определяем нужный тип фундамента, разрабатываем
+            чертежи с привязкой к границам участка и схему раскладки инженерных сетей под фундаментом
+          </p>
+        </div>
+      </div>
+      <div class="swiper-slide steps__slide">
+        <div class="steps__slide-inner with-light-texture">
+          <img class="steps__step-icon" aria-hidden="true" src="{% static './images/steps/step-4.svg' %}" alt="Четвертый этап">
+          <span class="title3-up steps__step-count">4 шаг</span>
+          <h3 class="title4 steps__step-title">Подробная смета и договор</h3>
+          <p class="text1 steps__step-text">
+            По результатам геологии и выбранного типа фундамента, группируем подробный
+            список работ и материалов в смету, фиксируем цену, заключаем договор, определяем
+            удобный для заказчика график финансирования
+          </p>
+        </div>
+      </div>
+      <div class="swiper-slide steps__slide">
+        <div class="steps__slide-inner with-light-texture">
+          <img class="steps__step-icon" aria-hidden="true" src="{% static './images/steps/step-5.svg' %}" alt="Пятый этап">
+          <span class="title3-up steps__step-count">5 шаг</span>
+          <h3 class="title4 steps__step-title">Закупка материалов и выполнение работ</h3>
+          <p class="text1 steps__step-text">
+            Дальше дело техники: закупаем материалы в соответствии со сметой, прокладываем
+            инженерные коммуникации и выполняем работы по фундаменту в соответствии
+            с заранее согласованными чертежами
+          </p>
+        </div>
+      </div>
+      <div class="swiper-slide steps__slide">
+        <div class="steps__slide-inner with-light-texture">
+          <img class="steps__step-icon" aria-hidden="true" src="{% static './images/steps/step-6.svg' %}" alt="Шестой этап">
+          <span class="title3-up steps__step-count">6 шаг</span>
+          <h3 class="title4 steps__step-title">Подписание акта приёмки</h3>
+          <p class="text1 steps__step-text">
+            После окончания работ подписывается акт приёмки и гарантийные обязательства.
+            Осуществляется финальный платёж за фундамент
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="projects" id="projects">
+  <!-- Добавить после согласования -->
+   <!-- Нужно еще поле с локацией проекта -->
+  {% for i in projects %}
+  <!-- цикл выдает по одному проекту из всей выборки -->
+  {{i.title}}
+  <!-- название проекта -->
+  {{i.description}}<!-- описание проекта -->
+  <img src="{{i.photo.url}}" />
+  <!--фото проекта -->
+  {% endfor %}
+  <!-- --------------------------- -->
+  <h2 class="title2-up projects__title">наши проекты</h2>
+  <div class="slider-nav projects__swiper-controls">
+    <button aria-label="Предыдущий слайд" class="slider-nav-arrow slider-nav-arrow__prev projects__btn-prev"></button>
+    <button aria-label="Следующий слайд" class="slider-nav-arrow slider-nav-arrow__next projects__btn-next"></button>
+  </div>
+  <div class="swiper projects__swiper" id="projects-slider">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide projects__slide">
+        <div class="projects__slide-inner with-light-texture">
+          <picture class="projects__picture">
+            <img src="{% static './images/projects/project-1.jpg' %}" alt="Первый вариант фаундамента Фундаменты-Спб.РФ" />
+          </picture>
+          <div class="projects__location">
+            <div class="projects__location-inner">
+              <img aria-hidden="true" src="{% static './images/icons/location.svg' %}" alt="Иконка локации" />
+              <span class="text3">Всеволожский р-н Ленинградская область</span>
+            </div>
+          </div>
+          <div class="projects__description">
+            <h3 class="title4 projects__item-title">Монолитная плита 300мм</h3>
+            <p class="text1 projects__item-text">бревенчатый дом с гаражом площадью 250м<sup>2</sup></p>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-slide projects__slide">
+        <div class="projects__slide-inner with-light-texture">
+          <picture class="projects__picture">
+            <img src="{% static './images/projects/project-2.jpg' %}" alt="Первый вариант фаундамента Фундаменты-Спб.РФ" />
+          </picture>
+          <div class="projects__location">
+            <div class="projects__location-inner">
+              <img aria-hidden="true" src="{% static './images/icons/location.svg' %}" alt="Иконка локации" />
+              <span class="text3">Выборгский р-н Ленинградская область</span>
+            </div>
+          </div>
+          <div class="projects__description">
+            <h3 class="title4 projects__item-title">Монолитная плита 300мм на свайном поле</h3>
+            <p class="text1 projects__item-text">дом из газобетона площадью 250м<sup>2</sup> + подпорная стенка на рельефном участке</p>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-slide projects__slide">
+        <div class="projects__slide-inner with-light-texture">
+          <picture class="projects__picture">
+            <img src="{% static './images/projects/project-3.jpg' %}" alt="Первый вариант фаундамента Фундаменты-Спб.РФ" />
+          </picture>
+          <div class="projects__location">
+            <div class="projects__location-inner">
+              <img aria-hidden="true" src="{% static './images/icons/location.svg' %}" alt="Иконка локации" />
+              <span class="text3">Приозёрский р-н Ленинградская область</span>
+            </div>
+          </div>
+          <div class="projects__description">
+            <h3 class="title4 projects__item-title">Монолитная плита 400мм с ростверком</h3>
+            <p class="text1 projects__item-text">дом из бревна площадью 170м<sup>2</sup></p>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-slide projects__slide">
+        <div class="projects__slide-inner with-light-texture">
+          <picture class="projects__picture">
+            <img src="{% static './images/projects/project-4.jpg' %}" alt="Четвертый вариант фаундамента Фундаменты-Спб.РФ" />
+          </picture>
+          <div class="projects__location">
+            <div class="projects__location-inner">
+              <img aria-hidden="true" src="{% static './images/icons/location.svg' %}" alt="Иконка локации" />
+              <span class="text3">Приозёрский р-н Ленинградская область</span>
+            </div>
+          </div>
+          <div class="projects__description">
+            <h3 class="title4 projects__item-title">Утеплённая монолитная плита 450мм с ростверком</h3>
+            <p class="text1 projects__item-text">дом из бревна площадью 230м<sup>2</sup></p>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-slide projects__slide">
+        <div class="projects__slide-inner with-light-texture">
+          <picture class="projects__picture">
+            <img src="{% static './images/projects/project-5.jpg' %}" alt="Пятый вариант фаундамента Фундаменты-Спб.РФ" />
+          </picture>
+          <div class="projects__location">
+            <div class="projects__location-inner">
+              <img aria-hidden="true" src="{% static './images/icons/location.svg' %}" alt="Иконка локации" />
+              <span class="text3">Выборгский р-н Ленинградская область</span>
+            </div>
+          </div>
+          <div class="projects__description">
+            <h3 class="title4 projects__item-title">Монолитный цокольный этаж</h3>
+            <p class="text1 projects__item-text">плита 300мм в основании, с дренажами и подбетонкой</p>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-slide projects__slide">
+        <div class="projects__slide-inner with-light-texture">
+          <picture class="projects__picture">
+            <img src="{% static './images/projects/project-6.jpg' %}" alt="Шестой вариант фаундамента Фундаменты-Спб.РФ" />
+          </picture>
+          <div class="projects__location">
+            <div class="projects__location-inner">
+              <img aria-hidden="true" src="{% static './images/icons/location.svg' %}" alt="Иконка локации" />
+              <span class="text3">Выборгский р-н Ленинградская область</span>
+            </div>
+          </div>
+          <div class="projects__description">
+            <h3 class="title4 projects__item-title">Монолитный цокольный этаж</h3>
+            <p class="text1 projects__item-text">вид изнутри</p>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-slide projects__slide">
+        <div class="projects__slide-inner with-light-texture">
+          <picture class="projects__picture">
+            <img src="{% static './images/projects/project-7.jpg' %}" alt="Седьмой вариант фаундамента Фундаменты-Спб.РФ" />
+          </picture>
+          <div class="projects__location">
+            <div class="projects__location-inner">
+              <img aria-hidden="true" src="{% static './images/icons/location.svg' %}" alt="Иконка локации" />
+              <span class="text3">Приозёрский р-н Ленинградская область</span>
+            </div>
+          </div>
+          <div class="projects__description">
+            <h3 class="title4 projects__item-title">Свайное поле</h3>
+            <p class="text1 projects__item-text">из 52 буронабивных свай под плиту 300мм на рельефном участке</p>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-slide projects__slide">
+        <div class="projects__slide-inner with-light-texture">
+          <picture class="projects__picture">
+            <img src="{% static './images/projects/project-8.jpg' %}" alt="Восьмой вариант фаундамента Фундаменты-Спб.РФ" />
+          </picture>
+          <div class="projects__location">
+            <div class="projects__location-inner">
+              <img aria-hidden="true" src="{% static './images/icons/location.svg' %}" alt="Иконка локации" />
+              <span class="text3">Приозёрский р-н Ленинградская область</span>
+            </div>
+          </div>
+          <div class="projects__description">
+            <h3 class="title4 projects__item-title">Плита 300мм</h3>
+            <p class="text1 projects__item-text">с подбетонкой, рулонной гидроизоляцией и дренажами под монолитный цоколь</p>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-slide projects__slide">
+        <div class="projects__slide-inner with-light-texture">
+          <picture class="projects__picture">
+            <img src="{% static './images/projects/project-9.jpg' %}" alt="Девятый вариант фаундамента Фундаменты-Спб.РФ" />
+          </picture>
+          <div class="projects__location">
+            <div class="projects__location-inner">
+              <img aria-hidden="true" src="{% static './images/icons/location.svg' %}" alt="Иконка локации" />
+              <span class="text3">Выборгский р-н Ленинградская область</span>
+            </div>
+          </div>
+          <div class="projects__description">
+            <h3 class="title4 projects__item-title">Реконструкция</h3>
+            <p class="text1 projects__item-text">увеличение площади существующего фундамента в 2 раза под гостиничный комплекс</p>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-slide projects__slide">
+        <div class="projects__slide-inner with-light-texture">
+          <picture class="projects__picture">
+            <img src="{% static './images/projects/project-10.jpg' %}" alt="Десятый вариант фаундамента Фундаменты-Спб.РФ" />
+          </picture>
+          <div class="projects__location">
+            <div class="projects__location-inner">
+              <img aria-hidden="true" src="{% static './images/icons/location.svg' %}" alt="Иконка локации" />
+              <span class="text3">Краснодарский край</span>
+            </div>
+          </div>
+          <div class="projects__description">
+            <h3 class="title4 projects__item-title">Монолитный фундамент</h3>
+            <p class="text1 projects__item-text">комплекс бассейнов в Краснодарском крае</p>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-slide projects__slide">
+        <div class="projects__slide-inner with-light-texture">
+          <picture class="projects__picture">
+            <img src="{% static './images/projects/project-11.jpg' %}" alt="Одиннадцатый вариант фаундамента Фундаменты-Спб.РФ" />
+          </picture>
+          <div class="projects__location">
+            <div class="projects__location-inner">
+              <img aria-hidden="true" src="{% static './images/icons/location.svg' %}" alt="Иконка локации" />
+              <span class="text3">Кингисепский р-н Ленинградская область</span>
+            </div>
+          </div>
+          <div class="projects__description">
+            <h3 class="title4 projects__item-title">Монолитная плита 300мм</h3>
+            <p class="text1 projects__item-text">бревенчатый дом площадью 140м<sup>2</sup> с буронабивными сваями под террасу</p>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-slide projects__slide">
+        <div class="projects__slide-inner with-light-texture">
+          <picture class="projects__picture">
+            <img src="{% static './images/projects/project-12.jpg' %}" alt="Двенадцатый вариант фаундамента Фундаменты-Спб.РФ" />
+          </picture>
+          <div class="projects__location">
+            <div class="projects__location-inner">
+              <img aria-hidden="true" src="{% static './images/icons/location.svg' %}" alt="Иконка локации" />
+              <span class="text3">Выборгский р-н Ленинградская область</span>
+            </div>
+          </div>
+          <div class="projects__description">
+            <h3 class="title4 projects__item-title">Монолитная плита 250мм</h3>
+            <p class="text1 projects__item-text">дом 113м<sup>2</sup> с буронабивными сваями под террасу</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="quotes" id="quotes">
+  <!-- Добавить после согласования -->
+  {% for otz in feedback %}<!-- цикл выдает по одному отзыву -->
+  {{ozt.title}}<!-- имя автора -->
+  {{otz.description}}<!-- сам отзыв -->
+  {% endfor %}
+  <!-- --------------------------- -->
+  <h2 class="title2-up quotes__title">о нас говорят</h2>
+  <div class="slider-nav quotes__swiper-controls">
+    <button aria-label="Предыдущий слайд" class="slider-nav-arrow slider-nav-arrow__prev quotes__btn-prev"></button>
+    <button aria-label="Следующий слайд" class="slider-nav-arrow slider-nav-arrow__next quotes__btn-next"></button>
+  </div>
+  <div class="swiper quotes__swiper" id="quotes-slider">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide quotes__slide">
+        <blockquote class="quotes__slide-inner with-light-texture">
+          <p class="text2 quotes__item-text">
+            Заказывала прошлой осенью в этой компании проект дома и фундамент,
+            Алексей дал очень много полезных рекомендаций как при проектировании,
+            так и по фундаменту, так как участок с уклоном, было много вопросов.
+            Сделали все оперативно и качественно, после заливки приезжали ещё 
+            несколько раз проверять как встал бетон. Результатом довольна, дом буду строить тоже у них.</p>
+          <cite class="title4 quotes__item-title">Елена</cite>
+        </blockquote>
+      </div>
+      <div class="swiper-slide quotes__slide">
+        <blockquote class="quotes__slide-inner with-light-texture">
+          <p class="text2 quotes__item-text">
+            Кашаев и мы — земляки! К Евгению обратились ещё в 2008 году
+            по вопросам стройки дома. Оперативно, с учётом зоны подтопления,
+            наших желаний, проект дома и бани Евгений подготовил. Устраивает нас всё!
+            Планировка отличная! Дом из дерева — самый лучший дом!
+            Кашаевы работают очень профессионально и имеют огромный опыт! Продолжайте! Удачи!
+          </p>
+          <cite class="title4 quotes__item-title">Галина</cite>
+        </blockquote>
+      </div>
+      <div class="swiper-slide quotes__slide">
+        <blockquote class="quotes__slide-inner with-light-texture">
+          <p class="text2 quotes__item-text">
+            Отличный коллектив! Удобные, продуманные дома! Настоящие профессионалы своего дела!
+          </p>
+          <cite class="title4 quotes__item-title">Владислав</cite>
+        </blockquote>
+      </div>
+      <div class="swiper-slide quotes__slide">
+        <blockquote class="quotes__slide-inner with-light-texture">
+          <p class="text2 quotes__item-text">
+            Заказывала прошлой осенью в этой компании проект дома и фундамент,
+            Алексей дал очень много полезных рекомендаций как при проектировании,
+            так и по фундаменту, так как участок с уклоном, было много вопросов.
+            Сделали все оперативно и качественно, после заливки приезжали ещё 
+            несколько раз проверять как встал бетон. Результатом довольна, дом буду строить тоже у них.</p>
+          <cite class="title4 quotes__item-title">Елена</cite>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="offer">
+  <div class="offer__inner with-light-texture">
+    <h2 class="title3-up offer__title">мы разработаем для вас индивидуальное предложение</h2>
+    <button data-open-popup='' class="font-button btn-dark offer__btn">Оставить заявку</button>
+  </div>
+</section>
+<section class="map">
+  <div class="map__description">
+    <h2 class="title3-up map__title">Нам доверяют!</h2>
+    <p class="text1 map__text">Мы уже построили более 180 фундаментов как на территории Санкт-Петербурга и Ленинградской области так и за их пределами. Какая будет следующая точка на карте?</p>
+  </div>
+  <picture class="map__map">
+    <source media="(min-width: 1100px)" srcset="{% static './images/map/map-desk.jpg' %}" />
+    <source media="(min-width: 600px)" srcset="{% static './images/map/map-tabl.jpg' %}" />
+    <img src="{% static './images/map/map.jpg' %}" alt="Карта готовых объектов Фундаменты-Спб.РФ" />
+  </picture>
+</section>
+<!-- форма -->
+{% if form.errors %}
+
+{% for field in form %}
+<!-- вывод ошибок для каждого поля, если они есть-->
+{% for error in field.errors %}
+{{ error|escape }}
+{% endfor %}
+{% endfor %}
+
+{% for error in form.non_field_errors %}
+{{ error|escape }}
+{% endfor %}
+
+{% endif%}
+
+<div class="popup {%if flag %}popup_opened{% endif %} confirm-popup">
+  <div class="popup__container confirm-popup__container with-light-texture">
+    <button aria-label="Закрыть окно" class="popup__close"></button>
+    <h2 class="title3-up popup__title">Данные успешно отправлены!</h2>
+    <p class="text2 popup__text">Наши специалисты свяжутся с вами в ближайшее время!</p>
+  </div>
+</div>
+
+<div class="popup request-popup">
+  <div class="popup__container request-popup__container with-light-texture">
+    <button aria-label="Закрыть окно" class="popup__close"></button>
+    <h2 class="title3-up popup__title">Оставить заявку</h2>
+    <p class="text2 popup__text">Оставьте свои контактные данные и мы вам перезвоним</p>
+    <form novalidate class="request-popup__form popup__form" method="post">
       {% csrf_token %}
-      {{form.as_p}} <!--Имя-->
-      <input type="submit" value="Отправить">
+      <div class="popup__input-block">
+        <span class="text4 popup__error {{form.first_name.name}}-error"></span>
+        <label for="id_first_name">Номер телефона</label>
+        {{form.first_name}}
+      </div>
+      <div class="popup__input-block">
+        <span class="text4 popup__error {{form.phone_number.name}}-error"></span>
+        <label for="id_phone_number">Номер телефона</label>
+        {{form.phone_number}}
+      </div>
+      <p class="text4 request-popup__agree">Нажимая «Отправить», я даю согласие
+        <a target="_blank" href="{% static './docs/privacy.pdf' %}">на обработку моих персональных данных</a>
+      </p>
+      <button class="font-button btn-dark popup__button" type="submit">Отправить</button>
     </form>
-    <!-- конец формы -->
-  </body>
-</html> 
+  </div>
+</div>
+{% endblock content %}
