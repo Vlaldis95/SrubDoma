@@ -44,7 +44,7 @@ anchors.forEach((anchor) => {
 const kindsSwiper = new Swiper(kindsSliderEl, {
   spaceBetween: 20,
   autoHeight: true,
-  speed: 1000,
+  speed: isDesktop ? 1000 : 800,
   navigation: {
     nextEl: ".kinds__btn-next",
     prevEl: ".kinds__btn-prev",
@@ -74,7 +74,7 @@ const quotesSwiper = new Swiper(quotesSliderEl, {
 const projectsSwiper = new Swiper(projectsSliderEl, {
   effect: isDesktop && "fade",
   spaceBetween: 20,
-  speed: 600,
+  speed: 800,
   autoHeight: true,
   autoplay: isDesktop && {
     delay: 2500,
