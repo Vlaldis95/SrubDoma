@@ -134,11 +134,11 @@
 </section>
 <section class="kinds" id="kinds">
   <!-- Добавить после согласования -->
-  {% for fundament in foundation %}<!-- цикл выдает по одному виду фундамента из всей выборки -->
-  {{fundament.title}}<!-- название фундамента -->
-  {{fundament.description}}<!-- описание фундамента -->
-  <img src="{{fundament.photo.url}}" /><!--фото фундамента -->
-  {% endfor %}
+  <!--{% for fundament in foundation %}--><!-- цикл выдает по одному виду фундамента из всей выборки -->
+  <!--{{fundament.title}}--><!-- название фундамента -->
+  <!--{{fundament.description}}--><!-- описание фундамента -->
+  <!--<img src="{{fundament.photo.url}}" /> --><!--фото фундамента -->
+  <!--{% endfor %}-->
   <!-- --------------------------- -->
 
   <h2 class="title2-up kinds__title">виды Фундаментов</h2>
@@ -332,15 +332,15 @@
 <section class="projects" id="projects">
   <!-- Добавить после согласования -->
    <!-- Нужно еще поле с локацией проекта -->
-  {% for i in projects %}
+  <!--{% for i in projects %}-->
   <!-- цикл выдает по одному проекту из всей выборки -->
-  {{i.title}}
+  <!--{{i.title}}-->
   <!-- название проекта -->
-  {{i.location}}<!-- местоположение проекта-->
-  {{i.description}}<!-- описание проекта -->
-  <img src="{{i.photo.url}}" />
+  <!--{{i.location}}--><!-- местоположение проекта-->
+  <!--{{i.description}}--><!-- описание проекта -->
+  <!--<img src="{{i.photo.url}}" />-->
   <!--фото проекта -->
-  {% endfor %}
+  <!--{% endfor %}-->
   <!-- --------------------------- -->
   <h2 class="title2-up projects__title">наши проекты</h2>
   <div class="slider-nav projects__swiper-controls">
@@ -558,10 +558,10 @@
 </section>
 <section class="quotes" id="quotes">
   <!-- Добавить после согласования -->
-  {% for otz in feedback %}<!-- цикл выдает по одному отзыву -->
-  {{ozt.title}}<!-- имя автора -->
-  {{otz.description}}<!-- сам отзыв -->
-  {% endfor %}
+  <!--{% for otz in feedback %}--><!-- цикл выдает по одному отзыву -->
+  <!--{{ozt.title}}--> <!-- имя автора -->
+  <!--{{otz.description}}--><!-- сам отзыв -->
+  <!--{% endfor %}-->
   <!-- --------------------------- -->
   <h2 class="title2-up quotes__title">о нас говорят</h2>
   <div class="slider-nav quotes__swiper-controls">
