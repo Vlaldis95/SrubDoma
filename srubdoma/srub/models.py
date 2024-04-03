@@ -18,6 +18,7 @@ class Foundation(models.Model):
 
 class Projects(models.Model):
     title = models.CharField(verbose_name='Название', max_length=100)
+    location = models.CharField(verbose_name='Местоположение', max_length=100, blank=True, null=True)
     description = models.TextField(verbose_name='Описание')
     photo = models.ImageField(verbose_name='Фотография',
                               upload_to='projects_photos/')
