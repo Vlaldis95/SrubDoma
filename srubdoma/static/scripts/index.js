@@ -15,7 +15,6 @@ const openFornBtns = root.querySelectorAll('[data-open-popup=""]');
 const telInput = root.querySelector(".request-popup__input_type_tel");
 const isDesktop = window.matchMedia("(min-width: 1010px)").matches;
 
-
 const toggleMenu = (isOpen) => {
   headerMenu.classList[isOpen ? "add" : "remove"]("_opened");
   menuBurgerSpans.forEach(function (item) {
@@ -43,7 +42,6 @@ anchors.forEach((anchor) => {
 
 const kindsSwiper = new Swiper(kindsSliderEl, {
   spaceBetween: 20,
-  autoHeight: true,
   speed: isDesktop ? 1000 : 800,
   navigation: {
     nextEl: ".kinds__btn-next",
@@ -75,7 +73,6 @@ const projectsSwiper = new Swiper(projectsSliderEl, {
   effect: isDesktop && "fade",
   spaceBetween: 20,
   speed: 800,
-  autoHeight: true,
   autoplay: isDesktop && {
     delay: 2500,
     disableOnInteraction: false,
